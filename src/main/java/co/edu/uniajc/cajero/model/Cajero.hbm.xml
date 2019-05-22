@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-mar-2019 9:45:12 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="model.Cajero" table="cajero" catalog="atm" optimistic-lock="version">
+        <id name="idCajero" type="java.lang.Integer">
+            <column name="id_cajero" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="banco" class="model.Banco" fetch="select">
+            <column name="id_banco" not-null="true" />
+        </many-to-one>
+        <property name="saldo" type="big_decimal">
+            <column name="saldo" precision="12" not-null="true" />
+        </property>
+        <property name="ubicacion" type="string">
+            <column name="ubicacion" length="45" />
+        </property>
+        <property name="indServicio" type="int">
+            <column name="ind_servicio" not-null="true" />
+        </property>
+        <set name="transaccions" table="transaccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cajero" not-null="true" />
+            </key>
+            <one-to-many class="model.Transaccion" />
+        </set>
+    </class>
+</hibernate-mapping>

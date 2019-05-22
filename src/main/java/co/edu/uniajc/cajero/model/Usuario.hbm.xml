@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-mar-2019 9:45:12 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="model.Usuario" table="usuario" catalog="atm" optimistic-lock="version">
+        <id name="idUsuario" type="java.lang.Integer">
+            <column name="id_usuario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tipoIdentificacion" class="model.TipoIdentificacion" fetch="select">
+            <column name="tipo_identificacion" not-null="true" />
+        </many-to-one>
+        <property name="identificacion" type="string">
+            <column name="identificacion" length="15" unique="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="45" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="45" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" length="10" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="fecCreacion" type="timestamp">
+            <column name="fec_creacion" length="19" />
+        </property>
+        <property name="fecActualiza" type="timestamp">
+            <column name="fec_actualiza" length="19" />
+        </property>
+        <set name="cuentas" table="cuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" not-null="true" />
+            </key>
+            <one-to-many class="model.Cuenta" />
+        </set>
+    </class>
+</hibernate-mapping>

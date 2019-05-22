@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-mar-2019 9:45:12 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="model.Cuenta" table="cuenta" catalog="atm" optimistic-lock="version">
+        <id name="idCuenta" type="java.lang.Integer">
+            <column name="id_cuenta" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="banco" class="model.Banco" fetch="select">
+            <column name="id_banco" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estado" class="model.Estado" fetch="select">
+            <column name="id_estado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="producto" class="model.Producto" fetch="select">
+            <column name="id_producto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="model.Usuario" fetch="select">
+            <column name="id_usuario" not-null="true" />
+        </many-to-one>
+        <property name="numero" type="string">
+            <column name="numero" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="saldo" type="big_decimal">
+            <column name="saldo" precision="12" not-null="true" />
+        </property>
+        <property name="clave" type="string">
+            <column name="clave" length="45" not-null="true" />
+        </property>
+        <set name="detalles" table="detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cuenta" not-null="true" />
+            </key>
+            <one-to-many class="model.Detalle" />
+        </set>
+        <set name="tarjetas" table="tarjeta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_cuenta" not-null="true" />
+            </key>
+            <one-to-many class="model.Tarjeta" />
+        </set>
+    </class>
+</hibernate-mapping>

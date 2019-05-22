@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Prueba - Acceso</title>
+</h:head>
+
+<h:body>
+
+	<p:growl id="growl" showDetail="true" showSummary="true" autoUpdate="true" life="6000" escape="false"/>
+
+	<h:form id="formBanco">
+
+		<p:panel header="Administracion de Bancos">
+
+			<br />
+
+			<p:panelGrid columns="3">
+
+				<f:facet name="header">Datos del Banco</f:facet>
+
+				<p:outputLabel value="NIT" for="nit" />
+				<p:inputText id="nit" value="#{BancoMB.nit}" />
+				<p:message for="nit" />
+
+				<p:outputLabel value="Nombre" for="nombre" />
+				<p:inputText id="nombre" value="#{BancoMB.nombre}" />
+				<p:message for="nombre" />
+
+				<p:outputLabel value="Direccion" for="direccion" />
+				<p:inputText id="direccion" value="#{BancoMB.direccion}" />
+				<p:message for="direccion" />
+
+				<p:outputLabel value="Telefono" for="telefono" />
+				<p:inputText id="telefono" value="#{BancoMB.telefono}" />
+				<p:message for="telefono" />
+
+			</p:panelGrid>
+
+			<br />
+
+
+			<p:commandButton value="enviar" id="send" update="growl"
+				action="#{BancoMB.buttonAction}" style="margin-right:20px;"
+				styleClass="ui-priority-primary" />
+			<p:commandButton value="Cancelar" actionListener="#{usuario.cancelar()}" />
+
+			<br />
+			<br />
+
+	<br />
+			<br />
+
+			
+
+		</p:panel>
+
+	</h:form>
+
+</h:body>
+
+</html>

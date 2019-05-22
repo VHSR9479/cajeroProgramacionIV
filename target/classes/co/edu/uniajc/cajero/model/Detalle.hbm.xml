@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-mar-2019 9:45:12 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="model.Detalle" table="detalle" catalog="atm" optimistic-lock="version">
+        <composite-id name="id" class="model.DetalleId">
+            <key-property name="idDetalle" type="int">
+                <column name="id_detalle" />
+            </key-property>
+            <key-property name="idTransaccion" type="int">
+                <column name="id_transaccion" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cuenta" class="model.Cuenta" fetch="select">
+            <column name="id_cuenta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="movimiento" class="model.Movimiento" fetch="select">
+            <column name="id_movimiento" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tarjeta" class="model.Tarjeta" fetch="select">
+            <column name="id_tarjeta" />
+        </many-to-one>
+        <many-to-one name="transaccion" class="model.Transaccion" update="false" insert="false" fetch="select">
+            <column name="id_transaccion" not-null="true" />
+        </many-to-one>
+        <property name="monto" type="big_decimal">
+            <column name="monto" precision="12" />
+        </property>
+    </class>
+</hibernate-mapping>

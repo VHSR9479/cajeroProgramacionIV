@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-mar-2019 9:45:12 by Hibernate Tools 5.1.0.Alpha1 -->
+<hibernate-mapping>
+    <class name="model.Estado" table="estado" catalog="atm" optimistic-lock="version">
+        <id name="idEstado" type="java.lang.Integer">
+            <column name="id_estado" />
+            <generator class="identity" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="45" />
+        </property>
+        <set name="cuentas" table="cuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_estado" not-null="true" />
+            </key>
+            <one-to-many class="model.Cuenta" />
+        </set>
+        <set name="tarjetas" table="tarjeta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_estado" not-null="true" />
+            </key>
+            <one-to-many class="model.Tarjeta" />
+        </set>
+    </class>
+</hibernate-mapping>
